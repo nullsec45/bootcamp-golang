@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"kasir-api/models"
 	"kasir-api/services"
-	"net/http"w	
+	"net/http"
 	"strconv"
 	"strings"
 )

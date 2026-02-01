@@ -3,7 +3,6 @@ package database
 import (
 	"database/sql"
 	"log"
-
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"fmt"
 )
