@@ -23,9 +23,10 @@ func (r *ReportRepository) GetSummary(start string, end string) (*models.SalesSu
         WHERE created_at BETWEEN $1 AND $2`, start, end).Scan(&summary.TotalRevenue, &summary.TotalTransaksi)
 
 	err = r.db.QueryRow(`
-        SELECT product_name, SUM(quantity) as qty 
+        SELECT products.name, SUM(quantity) as qty 
         FROM transaction_details
-        GROUP BY product_name ORDER BY qty DESC LIMIT 1`,
+		LEFT JOIN products ON transaction_details.product_id = products.id
+        GROUP BY products.name ORDER BY qty DESC LIMIT 1`,
     ).Scan(&summary.ProdukTerlaris.Nama, &summary.ProdukTerlaris.QtyTerjual)
 
 	if err != nil {
